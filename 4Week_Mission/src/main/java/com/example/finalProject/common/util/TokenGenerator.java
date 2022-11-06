@@ -2,6 +2,8 @@ package com.example.finalProject.common.util;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.util.UUID;
+
 public class TokenGenerator {
     private static final int TOKEN_LENGTH = 20;
 
@@ -10,6 +12,6 @@ public class TokenGenerator {
     }
 
     public static String randomCharacterWithPrefix(String prefix) {
-        return prefix + randomCharacter(TOKEN_LENGTH - prefix.length());
+        return prefix + UUID.randomUUID().toString().replace("-","");
     }
 }
