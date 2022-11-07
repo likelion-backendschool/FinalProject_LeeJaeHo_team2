@@ -13,12 +13,12 @@ import java.util.Collection;
 @ToString
 public class APIUserDTO extends User {
 
-    private String mid;
-    private String mpw;
+    private String username;
+    private String password;
 
     public APIUserDTO(String username, String password, Collection<GrantedAuthority> authorities) {
         super(username, password, authorities);
-        this.mid = username;
-        this.mpw = password;
+        this.username = username;
+        this.password = password;
     }
 }
