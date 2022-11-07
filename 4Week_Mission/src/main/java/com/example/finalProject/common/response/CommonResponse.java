@@ -34,4 +34,12 @@ public class CommonResponse<T> {
                 .success(true)
                 .build();
     }
+    public static CommonResponse fail(String errorCode) {
+        return CommonResponse.builder()
+                .resultCode("F-1")
+                .msg(errorCode)
+                .fail(false)
+                .success(true)
+                .build();
+    }
 }

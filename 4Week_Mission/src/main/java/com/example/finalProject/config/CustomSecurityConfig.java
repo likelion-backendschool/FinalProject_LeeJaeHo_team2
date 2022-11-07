@@ -3,6 +3,7 @@ package com.example.finalProject.config;
 import com.example.finalProject.common.util.JWTUtil;
 import com.example.finalProject.security.APIUserDetailsService;
 import com.example.finalProject.security.filter.APILoginFilter;
+import com.example.finalProject.security.filter.tokenCheckFilter;
 import com.example.finalProject.security.handler.APILoginSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -79,6 +80,12 @@ public class CustomSecurityConfig {
 
         //APILoginFilter의 위치 조정
         http.addFilterBefore(apiLoginFilter, UsernamePasswordAuthenticationFilter.class);
+
+        //api로 시작하면 토큰 검증 시작
+        http.addFilterBefore(
+                new tokenCheckFilter(apiUserDetailsService,jwtUtil),
+                UsernamePasswordAuthenticationFilter.class
+        );
 
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
