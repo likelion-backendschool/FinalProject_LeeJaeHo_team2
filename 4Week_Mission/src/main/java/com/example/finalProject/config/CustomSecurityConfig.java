@@ -67,7 +67,7 @@ public class CustomSecurityConfig {
         http.authenticationManager(authenticationManager);
 
         //APILoginFilter
-        APILoginFilter apiLoginFilter = new APILoginFilter("/generateToken");
+        APILoginFilter apiLoginFilter = new APILoginFilter("/api/v1/member/login");
         apiLoginFilter.setAuthenticationManager(authenticationManager);
 
 
