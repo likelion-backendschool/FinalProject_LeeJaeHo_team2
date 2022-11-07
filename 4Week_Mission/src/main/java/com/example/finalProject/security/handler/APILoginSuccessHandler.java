@@ -30,6 +30,7 @@ public class APILoginSuccessHandler implements AuthenticationSuccessHandler {
         log.info("Login Success Handler......................");
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setCharacterEncoding("UTF-8");
 
         log.info(authentication);
         log.info(authentication.getName()); //username
