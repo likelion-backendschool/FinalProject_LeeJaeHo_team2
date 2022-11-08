@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +22,7 @@ public class MemberApiController {
     @GetMapping("/me")
     public CommonResponse getMemberInfo(@AuthenticationPrincipal APIUserDTO apiUserDTO){
         System.out.println("유저 정보 나갑니다!!!");
-        return CommonResponse.success(memberRepository.findByUsername(apiUserDTO.getUsername()),"성공");
-
+        var user=memberRepository.findByUsername(apiUserDTO.getUsername()).orElseThrow();
+        return CommonResponse.success(Map.of("member",new MemberDto.MemberResponse(user)),"성공");
     }
 }
