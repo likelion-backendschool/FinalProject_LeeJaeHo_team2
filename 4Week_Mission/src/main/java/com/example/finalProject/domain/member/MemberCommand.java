@@ -3,6 +3,7 @@ package com.example.finalProject.domain.member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Builder
 @Getter
@@ -11,10 +12,10 @@ public class MemberCommand {
     private final String userName;
     private final String password;
     private final String emil;
-    public Member toEntity(){
+    public Member toEntity(PasswordEncoder passwordEncoder){
         return Member.builder()
                 .username(userName)
-                .password(password)
+                .password(passwordEncoder.encode(password))
                 .email(emil)
                 .build();
     }

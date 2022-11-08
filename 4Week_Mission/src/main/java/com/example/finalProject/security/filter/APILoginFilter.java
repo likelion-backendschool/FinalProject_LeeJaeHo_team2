@@ -1,6 +1,8 @@
 package com.example.finalProject.security.filter;
 
+import com.example.finalProject.infrastructure.member.MemberRepository;
 import com.google.gson.Gson;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

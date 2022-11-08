@@ -19,12 +19,12 @@ import java.util.stream.Collectors;
 
 public class MemberDto {
 
+
     @Getter
     @Setter
     @ToString
     @RequiredArgsConstructor
     public static class RegisterRequest {
-        private final PasswordEncoder passwordEncoder;
         @NotEmpty(message = "partnerName 는 필수값입니다")
         private String memberName;
 
@@ -38,7 +38,7 @@ public class MemberDto {
         public MemberCommand toCommand() {
             return MemberCommand.builder()
                     .userName(memberName)
-                    .password(passwordEncoder.encode(password))
+                    .password(password)
                     .emil(email)
                     .build();
         }

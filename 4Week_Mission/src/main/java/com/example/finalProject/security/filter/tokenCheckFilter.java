@@ -15,6 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -36,7 +37,8 @@ public class tokenCheckFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
 
 
-        if (!path.startsWith("/api/")) {
+        if (!path.startsWith("/api/")||path.contains("register")) {
+            log.info("넘어간다");
             filterChain.doFilter(request, response);
             return;
         }

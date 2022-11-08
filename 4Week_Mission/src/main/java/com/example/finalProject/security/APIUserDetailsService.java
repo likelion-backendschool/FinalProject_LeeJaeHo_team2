@@ -27,6 +27,7 @@ public class APIUserDetailsService implements UserDetailsService {
         Member result = memberRepository.findByUsername(username).orElseThrow(() ->new UsernameNotFoundException("Cannot find mid"));
         log.info("APIUserDetailsService apiUser-------------------------------------");
         APIUserDTO dto =  new APIUserDTO(
+                result.getId(),
                 result.getUsername(),
                 result.getPassword(),
                 List.of(new SimpleGrantedAuthority("ROLE_USER")));
