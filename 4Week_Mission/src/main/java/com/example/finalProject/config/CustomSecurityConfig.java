@@ -3,6 +3,7 @@ package com.example.finalProject.config;
 import com.example.finalProject.common.util.JWTUtil;
 import com.example.finalProject.security.APIUserDetailsService;
 import com.example.finalProject.security.filter.APILoginFilter;
+import com.example.finalProject.security.filter.RefreshTokenFilter;
 import com.example.finalProject.security.filter.tokenCheckFilter;
 import com.example.finalProject.security.handler.APILoginSuccessHandler;
 import lombok.RequiredArgsConstructor;
@@ -60,24 +61,17 @@ public class CustomSecurityConfig {
         //AuthenticationManager설정
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.userDetailsService(apiUserDetailsService).passwordEncoder(passwordEncoder());
-        // Get AuthenticationManager
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
-
-        //반드시 필요
         http.authenticationManager(authenticationManager);
 
-        //APILoginFilter
+
         APILoginFilter apiLoginFilter = new APILoginFilter("/api/v1/member/login");
         apiLoginFilter.setAuthenticationManager(authenticationManager);
 
 
-        //APILoginSuccessHandler
         APILoginSuccessHandler successHandler = new APILoginSuccessHandler(jwtUtil);
-        //SuccessHandler 세팅
         apiLoginFilter.setAuthenticationSuccessHandler(successHandler);
 
-
-        //APILoginFilter의 위치 조정
         http.addFilterBefore(apiLoginFilter, UsernamePasswordAuthenticationFilter.class);
 
         //api로 시작하면 토큰 검증 시작
@@ -85,6 +79,9 @@ public class CustomSecurityConfig {
                 new tokenCheckFilter(apiUserDetailsService,jwtUtil),
                 UsernamePasswordAuthenticationFilter.class
         );
+
+        http.addFilterBefore(new RefreshTokenFilter("/refreshToken", jwtUtil),
+                tokenCheckFilter.class);
 
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
