@@ -16,8 +16,8 @@ import java.util.Map;
 @Log4j2
 public class JWTUtil {
 
-
-    private String key="1231231423132313asdadasdasdasd";
+    @Value("${custom.jwt.key}")
+    private String key;
 
     public String generateToken(Map<String, Object> valueMap, int days){
 

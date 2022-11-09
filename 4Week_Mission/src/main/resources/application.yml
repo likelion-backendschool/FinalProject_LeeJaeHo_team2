@@ -15,3 +15,7 @@ spring:
   mvc:
     path match:
       matching-strategy: ant_path_matcher
+
+custom:
+  jwt:
+    key : asdasd123123123asdasd123123123asdasd123123123
