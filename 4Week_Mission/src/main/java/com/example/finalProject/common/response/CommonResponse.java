@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @Builder
 @NoArgsConstructor
@@ -17,6 +19,15 @@ public class CommonResponse<T> {
     public boolean success;
 
     public static <T> CommonResponse<T> success(T data, String message) {
+        return (CommonResponse<T>) CommonResponse.builder()
+                .resultCode("S-1")
+                .msg(message)
+                .data(data)
+                .fail(false)
+                .success(true)
+                .build();
+    }
+    public static <T> CommonResponse<T> success(List<T> data, String message) {
         return (CommonResponse<T>) CommonResponse.builder()
                 .resultCode("S-1")
                 .msg(message)
