@@ -2,6 +2,7 @@ package com.example.finalProject.domain.member;
 
 import com.example.finalProject.common.util.TokenGenerator;
 import com.example.finalProject.domain.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Member extends AbstractEntity {
     @Column(unique = true)
     private String username;
 
+    @JsonIgnore
     private String password;
 
     private String email;

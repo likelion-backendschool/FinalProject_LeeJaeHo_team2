@@ -4,4 +4,7 @@ public interface MemberReader {
     Member getMember(Long MemberId);
 
     Member getMember(String username);
+
+    Boolean existsByUsername(String username);
+
 }

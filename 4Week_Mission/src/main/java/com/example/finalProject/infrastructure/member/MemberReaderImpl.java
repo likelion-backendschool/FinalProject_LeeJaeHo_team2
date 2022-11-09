@@ -19,4 +19,9 @@ public class MemberReaderImpl implements MemberReader {
     public Member getMember(String username) {
         return memberRepository.findByUsername(username).orElseThrow(EntityNotFoundException::new);
     }
+
+    @Override
+    public Boolean existsByUsername(String username) {
+        return memberRepository.existsByUsername(username);
+    }
 }
