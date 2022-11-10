@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/week4?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
+    username: root
+    password:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.format_sql: true
+      hibernate:
+        default_batch_fetch_size: 1000
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
+
+custom:
+  jwt:
+    key : asdasd123123123asdasd123123123asdasd123123123
